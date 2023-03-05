@@ -1,5 +1,7 @@
 # ColorUtils
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/ShadiestGoat/colorutils.svg)](https://pkg.go.dev/github.com/ShadiestGoat/pronoundb)
+
 This package is intended to provide a few utility functions when it comes to colors in go.
 
 ## Color Space Conversion
