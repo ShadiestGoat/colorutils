@@ -37,9 +37,18 @@ func NewContrastColorLightBg(bgR, bgG, bgB uint8) (r, g, b uint8) {
 // Create a WCAG contrasting color with a target contrast ratio (+/- 0.05)
 // isLumLighter indicates if the argument `lum` is lighter than the generated color 
 func NewContrastColor(targetRatio float64, isLumLighter bool, lum float64) (r, g, b uint8) {
+	// targetRatio = (L1 + 0.05) / (L2 + 0.05)
 	if isLumLighter {
+		// L1 = lum
+		// lhs = L2
+		// targetRatio = (lum + 0.05) / (lhs + 0.05)
+		// lhs = (lum + 0.05)/targetRatio - 0.05
 		return lhsContrastSolver(((lum+0.05)/targetRatio) - 0.05)	
 	} else {
+		// L2 = lum
+		// lhs = L1
+		// targetRatio = (lhs + 0.05) / (lum + 0.05)
+		// lhs = targetRatio*(lum + 0.05) - 0.05
 		return lhsContrastSolver(targetRatio*(lum+0.05) - 0.05)
 	}
 }
