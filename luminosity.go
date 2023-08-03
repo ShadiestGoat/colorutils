@@ -57,7 +57,7 @@ func lhsContrastSolver(lhs float64) (r, g, b uint8) {
 	// we must now basically get the upper and lower bounds for a rand func, repeatedly
 	// lets do in r, g, b for now.
 	// a maximum value is the assumption that the rest are at their minimums, which for now we can assume to be 0s
-	// a minimum value is teh assumption that the rest sRGB values are 1s
+	// a minimum value is the assumption that the rest sRGB values are 1s
 
 	var VMap = map[rune]float64{
 		'r': 0,
