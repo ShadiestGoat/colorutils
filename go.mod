@@ -1,3 +1,3 @@
-module github.com/ShadiestGoat/colorutils
+module github.com/shadiestgoat/colorutils
 
 go 1.20

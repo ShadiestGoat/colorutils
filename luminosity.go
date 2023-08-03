@@ -24,17 +24,27 @@ func RelativeLuminosity(r, g, b uint8) float64 {
 	return LUMINOSITY_FACTOR_R*rv + LUMINOSITY_FACTOR_G*gv + LUMINOSITY_FACTOR_B*bv
 }
 
-// This creates a new WCAG AAA contrasting color to a background with the following assumptions:
-// - this color is used for text in a heading (ie. this makes a > 7 ratio, closer to 7.5)
-// - the background is darker than the text
-// 
-// The background is given by the RGB representation of it - bgR, bgG, bgB
-func NewContrastColor(bgR, bgG, bgB uint8) (r, g, b uint8) {
-	// 7.5 < (cY + 0.05)/(bgY + 0.05)
-	// 7.5*(bgY + 0.05) - 0.05 = cY
+// This creates a new WCAG AAA contrasting color to a dark background. This is an alias to NewContrastColor
+func NewContrastColorDarkBg(bgR, bgG, bgB uint8) (r, g, b uint8) {
+	return NewContrastColor(7.5, false, RelativeLuminosity(bgR, bgG, bgB))
+}
 
-	lhs := 7.5*(RelativeLuminosity(bgR, bgG, bgB)+0.05) - 0.05
+// This creates a new WCAG AAA contrasting color to a light background. This is an alias to NewContrastColor
+func NewContrastColorLightBg(bgR, bgG, bgB uint8) (r, g, b uint8) {
+	return NewContrastColor(7.5, true, RelativeLuminosity(bgR, bgG, bgB))
+}
 
+// Create a WCAG contrasting color with a target contrast ratio (+/- 0.05)
+// isLumLighter indicates if the argument `lum` is lighter than the generated color 
+func NewContrastColor(targetRatio float64, isLumLighter bool, lum float64) (r, g, b uint8) {
+	if isLumLighter {
+		return lhsContrastSolver(((lum+0.05)/targetRatio) - 0.05)	
+	} else {
+		return lhsContrastSolver(targetRatio*(lum+0.05) - 0.05)
+	}
+}
+
+func lhsContrastSolver(lhs float64) (r, g, b uint8) {
 	// we must now basically get the upper and lower bounds for a rand func, repeatedly
 	// lets do in r, g, b for now.
 	// a maximum value is the assumption that the rest are at their minimums, which for now we can assume to be 0s
