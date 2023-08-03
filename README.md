@@ -1,8 +1,16 @@
 # ColorUtils
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/ShadiestGoat/colorutils.svg)](https://pkg.go.dev/github.com/ShadiestGoat/colorutils)
+[![Go Reference](https://pkg.go.dev/badge/github.com/shadiestgoat/colorutils.svg)](https://pkg.go.dev/github.com/shadiestgoat/colorutils)
 
 This package is intended to provide a few utility functions when it comes to colors in go.
+
+## Installation
+
+To install, run the following command:
+
+```sh
+go get -u github.com/shadiestgoat/colorutils
+```
 
 ## Color Space Conversion
 
@@ -21,7 +29,7 @@ This package gives free conversion between RGB, HSV and HSL:
 
 This package provides a few utils for luminosity calculations. This is useful for creating colors that truly contrast each other, and meet WCAG standards. For this, the package provides `RelativeLuminosity` to calculate relative luminosity (Y) of a color, and `ContrastRatio` to calculate the ratio between 2 colors.
 
-The package also provides `NewContrastColor`, for when you want to generate a color brighter than your background, of contrast ratio > 7 (ie. meeting AAA for headings in WCAG)
+The package also provides `NewContrastColor`, for when you want to generate a WCAG compliant contrasting color, for both a lighter and a dark background.
 
 ## Hexadecimal
 
