@@ -57,5 +57,5 @@ func dSwitch(d float64, cMax rune, primes map[rune]float64) int {
 }
 
 func xValue(c float64, h int) float64 {
-	return 1 - math.Abs(float64(int(math.Round(float64(h)/60))%2-1))
+	return c * (1 - math.Abs(float64(int(math.Round(float64(h)/60))%2-1)))
 }
