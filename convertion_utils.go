@@ -46,7 +46,7 @@ func dSwitch(d float64, cMax rune, primes map[rune]float64) int {
 
 	switch cMax {
 	case 'r':
-		return int(math.Round((primes['g']-primes['b'])/d)) % 6
+		return int(math.Round(math.Mod((primes['g']-primes['b'])/d, 6)))
 	case 'g':
 		return int(math.Round((primes['b']-primes['r'])/d)) + 2
 	case 'b':
@@ -57,5 +57,5 @@ func dSwitch(d float64, cMax rune, primes map[rune]float64) int {
 }
 
 func xValue(c float64, h int) float64 {
-	return c * (1 - math.Abs(float64(int(math.Round(float64(h)/60))%2-1)))
+	return c * (1 - math.Abs(math.Mod(float64(h)/60, 2) - 1))
 }
