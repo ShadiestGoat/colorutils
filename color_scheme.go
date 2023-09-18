@@ -48,7 +48,8 @@ func ColorSchemeMonochromaticRGB(baseR, baseG, baseB uint8, n int) [][3]uint8 {
 // Generate a list of 3 hues for an Analogous color scheme, with baseH being the base hue.
 func ColorSchemeAnalogous(baseH int) [3]int {
 	// normalize it first
-	baseH = baseH % 360
+	baseH %= 360
+	
 	v := [3]int{baseH - 60, baseH, baseH + 60}
 	if baseH < 60 {
 		v[0] += 360
@@ -79,9 +80,7 @@ func ColorSchemeAnalogousRGB(baseR, baseG, baseB uint8) [3][3]uint8 {
 
 // generate a complimentary hue to baseH
 func ColorSchemeComplementary(baseH int) (h int) {
-	h = (baseH + 180) % 360
-
-	return
+	return (baseH + 180) % 360
 }
 
 // generate a complimentary color to baseR, baseG, baseB.
